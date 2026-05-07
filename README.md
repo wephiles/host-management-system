@@ -72,7 +72,7 @@ uv add django djangorestframework django-celery-beat django-filter celery redis 
 ```bash
 python manage.py makemigrations
 python manage.py migrate
-# (可选) 创建超级用户以访问 Django Admin 后台
+# 创建超级用户以访问 Django Admin 后台
 python manage.py createsuperuser
 ```
 
@@ -115,7 +115,7 @@ celery -A host_manage worker -l info -P solo
 celery -A host_manage beat -l info
 ```
 
-## ⚙️ 关键配置说明 (local_settings.py)
+## ⚙️ 关键配置说明 (host_manage/local.py)
 
 为了方便本地无主机环境测试，项目特别引入了 `MOCK_SSH` 开关：
 
