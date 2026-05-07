@@ -8,6 +8,7 @@
 
 """
 主机模型
+注意: 此项目为笔试项目, 为缩短开发时间, 没有写主键(ID), 因为 Django 在数据库迁移的过程中会自动加入主键字段, 但是在开发过程中还是要写的.
 """
 
 from django.db import models
@@ -73,14 +74,6 @@ class Host(models.Model):
         unique=True,
     )
 
-    city = models.ForeignKey(
-        City,
-        on_delete=models.SET_NULL,
-        null=True,
-        related_name='hosts',
-        verbose_name='所在城市',
-    )
-
     datacenter = models.ForeignKey(
         DataCenter,
         on_delete=models.SET_NULL,
@@ -96,6 +89,7 @@ class Host(models.Model):
     )
 
     created_at = models.DateTimeField(
+        '创建时间',
         auto_now_add=True,
     )
 
@@ -128,8 +122,14 @@ class HostDailyStat(models.Model):
 
     class Meta:
         verbose_name = '主机日统计'
+        verbose_name_plural = verbose_name
         # 联合唯一约束 同一天、同一城市、同一机房只能有一条记录
-        unique_together = ('date', 'city', 'datacenter')
+        constraints = [
+            models.UniqueConstraint(
+                fields=['date', 'city', 'datacenter'],
+                name='unique_daily_stat',
+            )
+        ]
 
     def __str__(self):
         return f'{self.date} | {self.city.name} | {self.datacenter.name} | 数量 {self.host_count}'

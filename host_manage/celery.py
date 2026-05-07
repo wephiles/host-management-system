@@ -12,8 +12,8 @@ Celery 实例
 from celery import Celery
 import os
 
-# 设置 Django 环境
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'host_manage.settings')
+# 设置 Django 环境 -- 用本地测试环境 -- 后续可用于生产环境
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'host_manage.configs.local')
 
 app = Celery('host_manage')
 app.config_from_object('django.conf:settings', namespace='CELERY')

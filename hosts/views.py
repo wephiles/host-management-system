@@ -5,11 +5,11 @@
 # This software is licensed under the MIT license.
 # See the LICENSE file for details.
 
-from django.shortcuts import render
 
 # Create your views here.
 
 import subprocess
+import platform
 from rest_framework import viewsets, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
@@ -37,9 +37,13 @@ class HostViewSet(viewsets.ModelViewSet):
         host = self.get_object()
         ip = host.ip_address
 
-        # 跨平台Ping命令 (Linux/Mac用 -c, Windows用 -n)，这里默认服务器是Windows
-        # -c 4 发送4个包，-W 2 超时2秒
-        command = ['ping', '-n', '4', '-W', '2', ip]
+        # 根据操作系统构造不同的 Ping 命令
+        if platform.system().lower() == 'windows':
+            # Windows: -n 4 表示发4个包，-w 2000 表示超时2000毫秒
+            command = ['ping', '-n', '4', '-w', '2000', ip]
+        else:
+            # Linux/Mac: -c 4 表示发4个包，-W 2 表示超时2秒
+            command = ['ping', '-c', '4', '-W', '2', ip]
 
         try:
             result = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=10)

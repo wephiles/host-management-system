@@ -6,7 +6,7 @@
 # See the LICENSE file for details.
 
 """
-中间件
+中间件, 用来统计每个请求的耗时.
 """
 
 import time
