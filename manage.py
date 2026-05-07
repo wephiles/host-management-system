@@ -1,4 +1,10 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+# Copyright (c) 2026 wephiles.
+# This software is licensed under the MIT license.
+# See the LICENSE file for details.
+
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
@@ -6,7 +12,7 @@ import sys
 
 def main():
     """Run administrative tasks."""
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'host_manage.settings')
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'host_manage.configs.local')
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
