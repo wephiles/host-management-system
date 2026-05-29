@@ -71,3 +71,11 @@ class HostDailyStatSerializer(serializers.ModelSerializer):
     class Meta:
         model = HostDailyStat
         fields = '__all__'
+
+
+class YesterdayCityDatacenterSerializer(serializers.Serializer):
+    """统计昨天各个城市和机房的主机数量"""
+
+    class Meta:
+        model = DataCenter
+        fields = '__all__'

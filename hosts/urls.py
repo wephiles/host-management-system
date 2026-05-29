@@ -16,9 +16,12 @@ router.register(r'cities', views.CityViewSet)
 router.register(r'datacenters', views.DataCenterViewSet)
 router.register(r'hosts', views.HostViewSet, basename='host')
 router.register(r'stats', views.HostDailyStatViewSet, basename='stat')
+router.register(r'counts', views.HostDailyStatViewSet, basename='stat')
 
 urlpatterns = [
     path('', include(router.urls)),
 ]
+
+
 
 # --END--

@@ -12,6 +12,7 @@
 """
 
 from django.db import models
+import uuid
 
 
 # Create your models here.
@@ -133,3 +134,36 @@ class HostDailyStat(models.Model):
 
     def __str__(self):
         return f'{self.date} | {self.city.name} | {self.datacenter.name} | 数量 {self.host_count}'
+
+
+class Student(models.Model):
+    id = models.UUIDField(
+        primary_key=True,
+        default=uuid.uuid4,
+        editable=False,
+    )
+
+    name = models.CharField(
+        '学生姓名',
+        max_length=50,
+    )
+
+    sex = models.CharField(
+        '性别',
+        max_length=5,
+        choices=[
+            ('male', '男'),
+            ('female', '女'),
+        ],
+    )
+
+    birthday = models.DateField(
+        '出生年月',
+    )
+
+    class_no = models.CharField(
+        '班级编号',
+        max_length=10,
+    )
+
+    # select * from student where class_no = '0001';

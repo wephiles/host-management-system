@@ -64,3 +64,8 @@ class HostDailyStatViewSet(viewsets.ReadOnlyModelViewSet):
     """统计接口只提供读取，不允许手动修改"""
     queryset = HostDailyStat.objects.all().order_by('-date')
     serializer_class = HostDailyStatSerializer
+
+
+class CountCity(viewsets.ModelViewSet):
+    pass
+
